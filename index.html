@@ -18,16 +18,20 @@
     <div id="content-container">
         <div id="settings-cc">
             <div id="grid-size-scc">
-                <div class="lable">Grid Size</div>
-                <div id="scroll-bar"></div>
+                <div class="lable">Grid Size: [js insert value]</div>
+                <div id="scroll-bar">
+                    <input type="range" id="grid-size-range" name="grid-size-range" min="1" max="100" value="50">
+                </div>
             </div>
             <div id="color-painting-scc">
                 <div class="lable">Chose Color</div>
-                <div id="color-palet"></div>
+                <div id="color-palet">
+                    <input type="color" id="color" name="color" value="#000000">
+                </div>
             </div>
             <div id="buttons-scc">
-                <button id="clear-button">Clear</button>
-                <button id="eraser-button">Eraser</button>
+                <button id="clear-button" onclick="clear()">Clear</button>
+                <button id="eraser-button" onclick="eraser()">Eraser</button>
             </div>
         </div>
         <div id="grid-content-container"></div>

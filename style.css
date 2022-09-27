@@ -1,0 +1,41 @@
+*{
+    border:1px solid gray;
+}
+
+body{
+    min-height: 100vh;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+h1{
+    text-align: center;
+}
+
+#content-container{
+    display: flex;
+    flex: auto;
+    align-items: center;
+}
+
+#settings-cc{
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+}
+
+#grid-content-container{
+    border: 5px solid black;
+    flex: 0 1 750px;
+    aspect-ratio: 1/1;         /* This is handy to remember*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#footer-container{
+    align-self: center;
+    justify-content: flex-end;
+}
+
