@@ -18,20 +18,26 @@ h1{
     display: flex;
     flex: auto;
     align-items: center;
+    justify-content: space-between;
 }
 
 #settings-cc{
     display: flex;
     flex-direction: column;
+    }
+
+#invisible-flex-box,#settings-cc{
     height: 400px;
+    width: 175px;
+    flex: 0 1 auto;
+
+    
 }
 
 #grid-content-container{
     border: 5px solid black;
     flex: 0 1 750px;
     aspect-ratio: 1/1;         /* This is handy to remember*/
-    margin-left: auto;
-    margin-right: auto;
 }
 
 #footer-container{
