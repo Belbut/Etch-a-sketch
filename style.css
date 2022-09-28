@@ -8,6 +8,8 @@ body{
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
+    font-family: "Roboto Mono", monospace;
+
 }
 
 h1{
@@ -26,12 +28,17 @@ h1{
     flex-direction: column;
     }
 
+button{
+    font-family: inherit;
+    font-size: 20px;
+    padding: 5px;
+    text-align: center;
+}
+
 #invisible-flex-box,#settings-cc{
     height: 400px;
     width: 175px;
-    flex: 0 1 auto;
-
-    
+    flex: 0 1 auto;    
 }
 
 #grid-content-container{
