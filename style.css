@@ -65,3 +65,7 @@ button {
     align-self: center;
     justify-content: flex-end;
 }
+
+.grid-box{
+    border:1px solid grey;
+}
