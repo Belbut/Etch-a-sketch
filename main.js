@@ -3,8 +3,13 @@ let gridSizeLabel = document.getElementById("grid-size-label");
 
 const gridContent = document.getElementById("grid-content-container");
 
+const colorPallet= document.getElementById("color-pallet");
+
 const clearButton = document.getElementById("clear-button");
 const eraserButton = document.getElementById("eraser-button");
+
+let colorBrush = colorPallet.value;
+console.log(colorBrush);
 
 onStart();
 
@@ -13,7 +18,7 @@ function onStart() {
     renderGrid(rangeInput.value);
 
     // TODO: Find a way to auto update this with out a Event Listener
-    rangeInput.addEventListener("click", () => {
+    rangeInput.addEventListener("input", () => {
         rangeInput = document.getElementById("grid-size-range");
         gridSizeLabel = document.getElementById("grid-size-label");
         gridSizeLabel.textContent = `Grid Size:${rangeInput.value}`;
@@ -22,10 +27,18 @@ function onStart() {
         renderGrid(rangeInput.value);
     });
 
+    colorPallet.addEventListener("input",()=>{
+        colorBrush= colorPallet.value;
+    });
+
     clearButton.addEventListener("click", () => {
         clearGrid();
         renderGrid(rangeInput.value);
     });
+
+   
+
+
 }
 
 function renderGrid(gridSize) {
