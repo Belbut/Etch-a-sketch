@@ -3,7 +3,7 @@ let gridSizeLabel = document.getElementById("grid-size-label");
 
 const gridContent = document.getElementById("grid-content-container");
 
-const colorPallet= document.getElementById("color-pallet");
+const colorPallet = document.getElementById("color-pallet");
 
 const clearButton = document.getElementById("clear-button");
 const eraserButton = document.getElementById("eraser-button");
@@ -22,22 +22,19 @@ function onStart() {
         rangeInput = document.getElementById("grid-size-range");
         gridSizeLabel = document.getElementById("grid-size-label");
         gridSizeLabel.textContent = `Grid Size:${rangeInput.value}`;
-
         clearGrid();
         renderGrid(rangeInput.value);
     });
 
-    colorPallet.addEventListener("input",()=>{
-        colorBrush= colorPallet.value;
-    });
+    colorPallet.addEventListener("input", () => colorBrush = colorPallet.value);
 
     clearButton.addEventListener("click", () => {
         clearGrid();
         renderGrid(rangeInput.value);
     });
 
-   
-
+    eraserButton.addEventListener("click", () =>
+        colorBrush = window.getComputedStyle(gridContent, null).getPropertyValue("background-color"));
 
 }
 
@@ -50,9 +47,13 @@ function renderGrid(gridSize) {
             const gridSquare = document.createElement("div");
             gridSquare.setAttribute("class", "grid-square");
             gridLine.append(gridSquare);
+            gridSquare.addEventListener("mouseover", (square) => paintSquare(square));
         }
     }
+}
 
+function paintSquare(square) {
+    square.target.style.backgroundColor = colorBrush;
 }
 
 function clearGrid() {
