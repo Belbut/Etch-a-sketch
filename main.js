@@ -9,7 +9,7 @@ const clearButton = document.getElementById("clear-button");
 const eraserButton = document.getElementById("eraser-button");
 
 let colorBrush = colorPallet.value;
-console.log(colorBrush);
+let isMouseDown;
 
 onStart();
 
@@ -33,8 +33,12 @@ function onStart() {
         renderGrid(rangeInput.value);
     });
 
-    eraserButton.addEventListener("click", () =>
-        colorBrush = window.getComputedStyle(gridContent, null).getPropertyValue("background-color"));
+    eraserButton.addEventListener("click", () => {
+        colorBrush = window.getComputedStyle(gridContent, null).getPropertyValue("background-color")
+    });
+
+    gridContent.addEventListener("mousedown", ()=> isMouseDown=true);
+    gridContent.addEventListener("mouseup", ()=> isMouseDown=false);
 
 }
 
@@ -52,8 +56,9 @@ function renderGrid(gridSize) {
     }
 }
 
+
 function paintSquare(square) {
-    square.target.style.backgroundColor = colorBrush;
+    if(isMouseDown)  square.target.style.backgroundColor = colorBrush;
 }
 
 function clearGrid() {
