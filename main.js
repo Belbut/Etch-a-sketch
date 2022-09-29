@@ -20,23 +20,28 @@ rangeInput.addEventListener("click", () => {
 
 clearButton.addEventListener("click", ()=>  {
     clearGrid();
-    renderGrid();
+    renderGrid(rangeInput.value);
 });
 
 
 
 function renderGrid(gridSize) {
-    for (let i = 1; i <= rangeInput.value; i++) {
-        const squareGrid = document.createElement("div");
-        squareGrid.setAttribute("class", "grid-box");
-        gridContent.append(squareGrid);
+    for (let line = 1; line <= gridSize; line++) {
+        const gridLine = document.createElement("div");
+        gridLine.setAttribute("class", "grid-line");
+        gridContent.append(gridLine);
+        for(let colum = 1; colum<=gridSize; colum++){
+            const gridSquare = document.createElement("div");
+            gridSquare.setAttribute("class","grid-square");
+            gridLine.append(gridSquare);
+        }
     }
-
 
 }
 
+
 function clearGrid() {
-    const endOfLifeGridBox = document.getElementsByClassName("grid-box");
+    const endOfLifeGridBox = document.getElementsByClassName("grid-line");
     for(let i=endOfLifeGridBox.length; i>0;i--){
         endOfLifeGridBox[i-1].remove();
     }
