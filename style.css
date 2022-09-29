@@ -60,6 +60,7 @@ button {
     aspect-ratio: 1/1;/* This is handy to remember*/
     display: flex;
     flex-direction: column;
+    background-color: beige;
     
 }
 .grid-line{
