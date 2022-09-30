@@ -1,4 +1,6 @@
-let rangeInput = document.getElementById("grid-size-range");
+//----------------------------------------------------------------- ELements
+
+let inputRangeGrid = document.getElementById("grid-size-range");
 let gridSizeLabel = document.getElementById("grid-size-label");
 
 const gridContent = document.getElementById("grid-content-container");
@@ -8,28 +10,28 @@ const shadowButton = document.getElementById("shadow-button");
 const clearButton = document.getElementById("clear-button");
 const eraserButton = document.getElementById("eraser-button");
 
-
+//----------------------------------------------------------------- Variables
 
 const MODES_OF_PAINTING = ["normal", "rainbow", "shadowing"];
 let colorBrush;
 let isMouseDown;
 let brushInUse;
 
-
+//----------------------------------------------------------------- Functions
+//Initialize all listener and variables
 function onStart() {
     colorBrush = colorPallet.value;
     normalBrush();
 
-    gridSizeLabel.textContent = `Grid Size:${rangeInput.value}`;
-    renderGrid(rangeInput.value);
+    gridSizeLabel.textContent = `Grid Size:${inputRangeGrid.value}`;
+    renderGrid(inputRangeGrid.value);
 
-    // TODO: Find a way to auto update this with out a Event Listener
-    rangeInput.addEventListener("input", () => {
-        rangeInput = document.getElementById("grid-size-range");
+    inputRangeGrid.addEventListener("input", () => {
+        inputRangeGrid = document.getElementById("grid-size-range");
         gridSizeLabel = document.getElementById("grid-size-label");
-        gridSizeLabel.textContent = `Grid Size:${rangeInput.value}`;
+        gridSizeLabel.textContent = `Grid Size:${inputRangeGrid.value}`;
         clearGrid();
-        renderGrid(rangeInput.value);
+        renderGrid(inputRangeGrid.value);
     });
 
     colorPallet.addEventListener("input", () => {
@@ -39,11 +41,11 @@ function onStart() {
 
     rainbowButton.addEventListener("click", () => rainbowBrush());
 
-    shadowButton.addEventListener("click", ()=> shadowBrush());
+    shadowButton.addEventListener("click", () => shadowBrush());
 
     clearButton.addEventListener("click", () => {
         clearGrid();
-        renderGrid(rangeInput.value);
+        renderGrid(inputRangeGrid.value);
     });
 
     eraserButton.addEventListener("click", () => {
@@ -69,26 +71,24 @@ function renderGrid(gridSize) {
     }
 }
 
-
 function paintSquare(square) {
     if (isMouseDown) {
         switch (brushInUse) {
             //normal
             case MODES_OF_PAINTING[0]:
                 square.target.style.backgroundColor = colorBrush;
-                square.target.style.opacity="";
+                square.target.style.opacity = "";
                 break;
             //rainbow
             case MODES_OF_PAINTING[1]:
                 square.target.style.backgroundColor = randomColor();
-                square.target.style.opacity="";
+                square.target.style.opacity = "";
                 break;
             //shadowing
             case MODES_OF_PAINTING[2]:
                 square.target.style.backgroundColor = colorBrush;
-                square.target.style.opacity=Number(square.target.style.opacity)+0.1;
+                square.target.style.opacity = Number(square.target.style.opacity) + 0.1;
                 break;
-
         }
     }
 }
@@ -100,22 +100,11 @@ function clearGrid() {
     }
 }
 
-function randomColor() {
-    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-}
+const randomColor =() => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+const normalBrush = ()=>brushInUse = MODES_OF_PAINTING[0];
+const rainbowBrush=() => brushInUse = MODES_OF_PAINTING[1];
+const shadowBrush=() => brushInUse = MODES_OF_PAINTING[2];
 
 
-// created by "bionicvapourboy";
-function percentToHex (p) {
-    const percent = Math.max(0, Math.min(100, p)); // bound percent from 0 to 100
-    const intValue = Math.round(percent / 100 * 255); // map percent to nearest integer (0 - 255)
-    const hexValue = intValue.toString(16); // get hexadecimal representation
-    return hexValue.padStart(2, '0').toUpperCase(); // format with leading 0 and upper case characters
-}
-
-
-function normalBrush() { brushInUse = MODES_OF_PAINTING[0] };
-function rainbowBrush() { brushInUse = MODES_OF_PAINTING[1] };
-function shadowBrush() { brushInUse = MODES_OF_PAINTING[2] }
-
+//----------------------------------------------------------------- Run
 onStart();
