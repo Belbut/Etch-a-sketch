@@ -2,18 +2,24 @@ let rangeInput = document.getElementById("grid-size-range");
 let gridSizeLabel = document.getElementById("grid-size-label");
 
 const gridContent = document.getElementById("grid-content-container");
-
 const colorPallet = document.getElementById("color-pallet");
-
+const rainbowButton = document.getElementById("rainbow-button");
+const shadowButton = document.getElementById("shadow-button");
 const clearButton = document.getElementById("clear-button");
 const eraserButton = document.getElementById("eraser-button");
 
-let colorBrush = colorPallet.value;
-let isMouseDown;
 
-onStart();
+
+const MODES_OF_PAINTING = ["normal", "rainbow", "shadowing"];
+let colorBrush;
+let isMouseDown;
+let brushInUse;
+
 
 function onStart() {
+    colorBrush = colorPallet.value;
+    normalBrush();
+
     gridSizeLabel.textContent = `Grid Size:${rangeInput.value}`;
     renderGrid(rangeInput.value);
 
@@ -26,7 +32,14 @@ function onStart() {
         renderGrid(rangeInput.value);
     });
 
-    colorPallet.addEventListener("input", () => colorBrush = colorPallet.value);
+    colorPallet.addEventListener("input", () => {
+        normalBrush();
+        colorBrush = colorPallet.value;
+    });
+
+    rainbowButton.addEventListener("click", () => rainbowBrush());
+
+    shadowButton.addEventListener("click", ()=> shadowBrush());
 
     clearButton.addEventListener("click", () => {
         clearGrid();
@@ -34,12 +47,12 @@ function onStart() {
     });
 
     eraserButton.addEventListener("click", () => {
-        colorBrush = window.getComputedStyle(gridContent, null).getPropertyValue("background-color")
+        normalBrush();
+        colorBrush = window.getComputedStyle(gridContent, null).getPropertyValue("background-color");
     });
 
-    gridContent.addEventListener("mousedown", ()=> isMouseDown=true);
-    gridContent.addEventListener("mouseup", ()=> isMouseDown=false);
-
+    gridContent.addEventListener("mousedown", () => isMouseDown = true);
+    gridContent.addEventListener("mouseup", () => isMouseDown = false);
 }
 
 function renderGrid(gridSize) {
@@ -58,7 +71,26 @@ function renderGrid(gridSize) {
 
 
 function paintSquare(square) {
-    if(isMouseDown)  square.target.style.backgroundColor = colorBrush;
+    if (isMouseDown) {
+        switch (brushInUse) {
+            //normal
+            case MODES_OF_PAINTING[0]:
+                square.target.style.backgroundColor = colorBrush;
+                square.target.style.opacity="";
+                break;
+            //rainbow
+            case MODES_OF_PAINTING[1]:
+                square.target.style.backgroundColor = randomColor();
+                square.target.style.opacity="";
+                break;
+            //shadowing
+            case MODES_OF_PAINTING[2]:
+                square.target.style.backgroundColor = colorBrush;
+                square.target.style.opacity=Number(square.target.style.opacity)+0.1;
+                break;
+
+        }
+    }
 }
 
 function clearGrid() {
@@ -68,4 +100,22 @@ function clearGrid() {
     }
 }
 
+function randomColor() {
+    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+}
 
+
+// created by "bionicvapourboy";
+function percentToHex (p) {
+    const percent = Math.max(0, Math.min(100, p)); // bound percent from 0 to 100
+    const intValue = Math.round(percent / 100 * 255); // map percent to nearest integer (0 - 255)
+    const hexValue = intValue.toString(16); // get hexadecimal representation
+    return hexValue.padStart(2, '0').toUpperCase(); // format with leading 0 and upper case characters
+}
+
+
+function normalBrush() { brushInUse = MODES_OF_PAINTING[0] };
+function rainbowBrush() { brushInUse = MODES_OF_PAINTING[1] };
+function shadowBrush() { brushInUse = MODES_OF_PAINTING[2] }
+
+onStart();

@@ -13,7 +13,6 @@ body {
     background-color: #a3b2c9;
 }
 
-
 #content-container {
     display: flex;
     flex: auto;
@@ -48,7 +47,7 @@ button {
 
 #invisible-flex-box,
 #settings-cc {
-    height: 300px;
+    height: 400px;
     width: 175px;
     flex: 0 1 auto;
     padding-left: 25px;
@@ -61,8 +60,8 @@ button {
     display: flex;
     flex-direction: column;
     background-color: beige;
-    
 }
+
 .grid-line{
     border-top: 1px solid grey;
     flex: 1 1 0;
