@@ -20,7 +20,7 @@ From The Odin Project's [curriculum](https://www.theodinproject.com/courses/foun
 ### What I learned
 
 * Implemented basic **Javascript**.
-* Implemented a lot of concepts from practiced **CSS3** like mainly Flex Box.
+* Implemented and practiced a lot of concepts from **CSS3** curriculum mainly Flex Box.
 * Improved my Modern web debugging with **Chrome DevTools**.
 * Attempted to be more mindful to **Code Structure** and **Clean Code** rules.
 
